@@ -1,11 +1,26 @@
 import streamlit as st
+from iso3166 import countries
 
+from api.driver.logic_service import run
 from models.messages import Role, Message
 from app.rendering import render_left_message, render_right_message
 from app.states import init_states, get_chat_messages, get_interface_messages, save_customer_message
+from models.settings import ChatSettings
 
-st.set_page_config(page_title="CSRbot Demo", layout="wide")
+st.set_page_config(page_title="CSR Bot Demo", layout="wide")
 init_states()
+
+with st.sidebar:
+    st.markdown("**Settings**")
+    location = st.selectbox(
+        label="Your Location",
+        options=[c.name for c in countries],
+    )
+    settings = ChatSettings(
+        company="Singtel",
+        location=location,
+    )
+
 
 left, right = st.columns(2)
 
@@ -37,4 +52,6 @@ with right:
         st.experimental_rerun()
 
 if len(interface_messages) > 0 and interface_messages[-1].role != Role.bot:
-    ...
+    run(messages=interface_messages, settings=settings)
+    st.experimental_rerun()
+

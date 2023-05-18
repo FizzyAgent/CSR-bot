@@ -18,7 +18,16 @@ def get_chat_messages() -> list[Message]:
 def save_customer_message(message: Message) -> None:
     assert message.role == Role.customer
     st.session_state.chat_messages.append(message)
-    st.session_state.interface_messages.append(format_customer_input(text=message.text))
+    interface_message = Message(
+        role=Role.system,
+        text=format_customer_input(text=message.text),
+    )
+    st.session_state.interface_messages.append(interface_message)
+
+
+def save_bot_message(message: Message) -> None:
+    assert message.role == Role.bot
+    st.session_state.chat_messages.append(message)
 
 
 def get_interface_messages() -> list[Message]:
