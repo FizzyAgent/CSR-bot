@@ -1,15 +1,15 @@
 from streamlit.delta_generator import DeltaGenerator
 
-from app.models import Message
+from models.messages import Message
 
 
-def render_left_msg(delta: DeltaGenerator, msg: Message):
-    delta.markdown(f"{msg.role.humanized}:  \n{msg.text}")
+def render_left_message(delta: DeltaGenerator, message: Message):
+    delta.markdown(f"{message.role.humanized}:  \n{message.text}")
 
 
-def render_right_msg(delta: DeltaGenerator, msg: Message):
+def render_right_message(delta: DeltaGenerator, message: Message):
     delta.markdown(
-        f'<div style="text-align: right;">{msg.role.humanized}:</div>'
-        f'<div style="text-align: right;">{msg.text}</div>',
+        f'<div style="text-align: right;">{message.role.humanized}:</div>'
+        f'<div style="text-align: right;">{message.text}</div>',
         unsafe_allow_html=True,
     )

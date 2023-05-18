@@ -1,8 +1,8 @@
 import streamlit as st
 
-from app.models import Role, Message
-from app.rendering import render_left_msg, render_right_msg
-from app.states import init_states, get_chat_msgs, get_interface_msgs, append_chat_msg
+from models.messages import Role, Message
+from app.rendering import render_left_message, render_right_message
+from app.states import init_states, get_chat_messages, get_interface_messages, save_customer_message
 
 st.set_page_config(page_title="CSRbot Demo", layout="wide")
 init_states()
@@ -11,27 +11,30 @@ left, right = st.columns(2)
 
 with left:
     st.markdown("### Behind the scenes of CSRbot")
-    interface_msgs = get_interface_msgs()
-    for msg in interface_msgs:
-        if msg.role == Role.bot:
-            render_right_msg(delta=left, msg=msg)
-        elif msg.role == Role.system:
-            render_left_msg(delta=left, msg=msg)
+    interface_messages = get_interface_messages()
+    for message in interface_messages:
+        if message.role == Role.bot:
+            render_right_message(delta=left, message=message)
+        elif message.role == Role.system:
+            render_left_message(delta=left, message=message)
 
 with right:
     st.markdown("### Chat with CSRbot")
-    chat_msgs = get_chat_msgs()
-    for msg in chat_msgs:
-        if msg.role == Role.customer:
-            render_right_msg(delta=right, msg=msg)
-        elif msg.role == Role.bot:
-            render_left_msg(delta=right, msg=msg)
+    chat_messages = get_chat_messages()
+    for message in chat_messages:
+        if message.role == Role.customer:
+            render_right_message(delta=right, message=message)
+        elif message.role == Role.bot:
+            render_left_message(delta=right, message=message)
     new_input = st.text_area(
         label="Message Box",
         label_visibility="hidden",
-        key=f"message_input_{len(chat_msgs)}",
+        key=f"message_input_{len(chat_messages)}",
     )
     if st.button("Submit") and new_input:
-        new_msg = Message(role=Role.customer, text=new_input)
-        append_chat_msg(msg=new_msg)
+        new_message = Message(role=Role.customer, text=new_input)
+        save_customer_message(message=new_message)
         st.experimental_rerun()
+
+if len(interface_messages) > 0 and interface_messages[-1].role != Role.bot:
+    ...
