@@ -34,5 +34,5 @@ def get_interface_messages() -> list[Message]:
     return st.session_state.interface_messages
 
 
-def append_interface_message(message: Message) -> None:
+def save_interface_message(message: Message) -> None:
     st.session_state.interface_messages.append(message)
