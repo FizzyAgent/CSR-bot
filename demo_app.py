@@ -4,7 +4,15 @@ from iso3166 import countries
 from api.driver.logic_service import run
 from models.messages import Role, Message
 from app.rendering import render_left_message, render_right_message
-from app.states import init_states, get_chat_messages, get_interface_messages, save_customer_message
+from app.states import (
+    init_states,
+    get_chat_messages,
+    get_interface_messages,
+    save_customer_message,
+    get_all_companies,
+    set_company_name,
+    get_resource_loader,
+)
 from models.settings import ChatSettings
 
 st.set_page_config(page_title="CSR Bot Demo", layout="wide")
@@ -12,13 +20,16 @@ init_states()
 
 with st.sidebar:
     st.markdown("**Settings**")
+    company = st.selectbox(label="Select a Company", options=get_all_companies())
+    set_company_name(company_name=company)
     location = st.selectbox(
         label="Your Location",
         options=[c.name for c in countries],
     )
     settings = ChatSettings(
-        company="Singtel",
+        company=company,
         location=location,
+        resource_loader=get_resource_loader(),
     )
 
 
@@ -54,4 +65,3 @@ with right:
 if len(interface_messages) > 0 and interface_messages[-1].role != Role.bot:
     run(messages=interface_messages, settings=settings)
     st.experimental_rerun()
-
