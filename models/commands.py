@@ -23,7 +23,7 @@ class Command(ABC):
 
 
 class EchoCommand(Command):
-    _pattern = re.compile(r'echo \$ "(.*)"\s+echo \$ "evaluation: (.*)"', re.MULTILINE)
+    _pattern = re.compile(r'echo \$ "(.*)"\s+.*evaluation: (\w*)', re.MULTILINE)
 
     def __init__(self, matches: tuple[str, ...], settings: ChatSettings):
         assert len(matches) == 2
