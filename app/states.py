@@ -33,7 +33,7 @@ def save_customer_message(message: Message) -> None:
     assert message.role == Role.customer
     st.session_state.chat_messages.append(message)
     interface_message = Message(
-        role=Role.system,
+        role=Role.app,
         text=format_customer_input(text=message.text),
     )
     st.session_state.interface_messages.append(interface_message)

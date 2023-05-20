@@ -21,8 +21,11 @@ class ResourceLoader(BaseModel):
             raise Exception("Company not found:: {}".format(company_name))
         self.company_name = company_name
 
-    def load(self, file_name: str) -> str:
-        file_path = os.path.join(self.resource_path, file_name)
+    def get_all_resources(self) -> list[str]:
+        return os.listdir(os.path.join(self.resource_path, self.company_name))
+
+    def load_resource(self, file_name: str) -> str:
+        file_path = os.path.join(self.resource_path, self.company_name, file_name)
         if not os.path.isfile(file_path):
             raise Exception("Resource file does not exist: {}".format(file_path))
         with open(file_path, "r") as f:

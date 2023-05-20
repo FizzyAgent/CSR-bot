@@ -3,6 +3,7 @@ from api.gpt.gpt_service import get_chat_response
 from app.states import save_interface_message
 from models.messages import Message, Role
 from models.settings import ChatSettings
+from resources.resource_loader import ResourceLoader
 
 
 def run(messages: list[Message], settings: ChatSettings):
@@ -10,13 +11,14 @@ def run(messages: list[Message], settings: ChatSettings):
         messages=messages,
         company=settings.company,
         location=settings.location,
+        resources=settings.resource_loader.get_all_resources(),
     )
-    commands = parse_gpt_output(output=gpt_output, settings=settings)
-    for command in commands:
-        command.run()
     save_interface_message(
         message=Message(
             role=Role.bot,
             text=gpt_output,
         )
     )
+    commands = parse_gpt_output(output=gpt_output, settings=settings)
+    for command in commands:
+        command.run()

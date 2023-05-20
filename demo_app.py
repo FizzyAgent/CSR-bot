@@ -41,7 +41,7 @@ with left:
     for message in interface_messages:
         if message.role == Role.bot:
             render_right_message(delta=left, message=message)
-        elif message.role == Role.system:
+        elif message.role == Role.app:
             render_left_message(delta=left, message=message)
 
 with right:

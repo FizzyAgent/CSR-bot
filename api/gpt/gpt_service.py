@@ -10,15 +10,23 @@ def get_chat_input(messages: list[Message]) -> list[dict[str, str]]:
     return [m.to_gpt_message() for m in messages]
 
 
-def get_chat_response(messages: list[Message], company: str, location: str) -> str:
+def get_chat_response(messages: list[Message], company: str, location: str, resources: list[str]) -> str:
     prompt_message = Message(
         role=Role.app,
         text=f"""The customer is connecting from {location}. Today's date is {datetime.now().strftime("%d %b %Y")}.
 The company you are representing is {company}""",
     )
+    resource_string = "\n".join([f"{i + 1}. {r}" for i, r in enumerate(resources)])
     instructions_message = Message(
         role=Role.app,
         text=f"""You may than choose one of the following commands to best help you address the customer's enquiry. 
+
+# Resources
+
+The company has provided the following resource text files available for you to refer:
+{resource_string}
+
+The content of these resources can be displayed using the command: 'cat [filename].txt'
 
 # Replying to a customer
 
