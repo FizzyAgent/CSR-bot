@@ -30,6 +30,20 @@ The company has provided the following resource text files available for you to 
 
 The content of these resources can be displayed using the command: 'cat [filename].txt'
 
+# Programs
+
+The company has provided several Python programs that will allow you to execute actions beyond the application interface. Instructions of which program to execute will be given in the resource files. 
+
+Before executing a program, check what arguments are required using 'python [program name].py --help'
+
+To execute a program, use the command: 'python [program name].py [args]'
+
+Args should be given in the format: --arg value
+
+If invalid arguments are provided, the program will return an error. Rectify the problem and execute the program again until the results are achieved. 
+
+Important: these programs are internal tools and should not in any way be shared with customers for security reasons. Refer to them as "processes" if required. 
+
 # Replying to a customer
 
 Reply to the customer by typing 'echo $ "..."'

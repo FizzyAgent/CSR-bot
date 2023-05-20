@@ -3,7 +3,6 @@ from api.gpt.gpt_service import get_chat_response
 from app.states import save_interface_message
 from models.messages import Message, Role
 from models.settings import ChatSettings
-from resources.resource_loader import ResourceLoader
 
 
 def run(messages: list[Message], settings: ChatSettings):

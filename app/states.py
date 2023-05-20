@@ -2,7 +2,7 @@ import streamlit as st
 
 from api.driver.formatter import format_customer_input
 from models.messages import Message, Role
-from resources.resource_loader import ResourceLoader
+from models.resource_loader import ResourceLoader
 
 
 def init_states():

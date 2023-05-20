@@ -1,6 +1,6 @@
 Steps to terminate account:
 1. Check with customers if they would like to suspend the account temporarily instead.
-2. If suspension, refer to resource "account_suspension".
+2. If suspension, refer to resource "account_suspension.txt".
 3. Use program terminate_account to terminate the account
 4. Inform the customer that termination is successful.
 5. Use program termination_feedback to get feedback from the customer
