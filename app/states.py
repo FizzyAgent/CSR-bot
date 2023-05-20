@@ -2,6 +2,7 @@ import streamlit as st
 
 from api.driver.formatter import format_customer_input
 from models.messages import Message, Role
+from models.program_loader import ProgramLoader
 from models.resource_loader import ResourceLoader
 
 
@@ -11,6 +12,7 @@ def init_states():
         st.session_state["chat_messages"] = []
         st.session_state["interface_messages"] = []
         st.session_state["resource_loader"] = ResourceLoader()
+        st.session_state["program_loader"] = ProgramLoader()
 
 
 def get_all_companies() -> list[str]:
@@ -18,11 +20,16 @@ def get_all_companies() -> list[str]:
 
 
 def set_company_name(company_name) -> None:
-    st.session_state.resource_loader.load_company(company_name=company_name)
+    st.session_state.resource_loader.set_company(company_name=company_name)
+    st.session_state.program_loader.set_company(company_name=company_name)
 
 
 def get_resource_loader() -> ResourceLoader:
     return st.session_state.resource_loader
+
+
+def get_program_loader() -> ProgramLoader:
+    return st.session_state.program_loader
 
 
 def get_chat_messages() -> list[Message]:

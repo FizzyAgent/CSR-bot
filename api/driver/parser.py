@@ -1,11 +1,20 @@
 import re
 from typing import Type
 
-from models.commands import Command, EchoCommand, SafeEchoCommand, ResourceCommand
+from models.commands import (
+    Command,
+    EchoCommand,
+    SafeEchoCommand,
+    ResourceCommand,
+    ProgramInfoCommand,
+    ProgramRunCommand,
+)
 from models.settings import ChatSettings
 
 __all_commands: list[Type[Command]] = [
     ResourceCommand,
+    ProgramInfoCommand,
+    ProgramRunCommand,
     EchoCommand,
 ]
 

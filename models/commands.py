@@ -1,10 +1,13 @@
+import random
 import re
+import shlex
 from abc import ABC
 from re import Pattern
 
 from api.gpt.util import SAFETY_TEXT
 from app.states import save_bot_message, save_interface_message
 from models.messages import Message, Role
+from models.program_loader import ProgramArgParser, ProgramArgParserError
 from models.settings import ChatSettings
 
 
@@ -49,7 +52,7 @@ class ResourceCommand(Command):
     _pattern = re.compile(r"cat (.*)")
 
     def __init__(self, matches: tuple[str, ...], settings: ChatSettings):
-        assert len(matches) > 0
+        assert len(matches) == 1
         super().__init__(matches=matches, settings=settings)
         self.file_name = matches[0]
         self.resource_loader = settings.resource_loader
@@ -61,3 +64,52 @@ class ResourceCommand(Command):
             text=resource,
         )
         save_interface_message(message=resource_message)
+
+
+class ProgramInfoCommand(Command):
+    _pattern = re.compile(r"python (.*).py --help")
+
+    def __init__(self, matches: tuple[str, ...], settings: ChatSettings):
+        assert len(matches) == 1
+        super().__init__(matches=matches, settings=settings)
+        self.file_name = matches[0]
+        self.program_loader = settings.program_loader
+
+    def run(self):
+        program = self.program_loader.load_program(file_name=self.file_name)
+        program_message = Message(
+            role=Role.app,
+            text=program.help,
+        )
+        save_interface_message(message=program_message)
+
+
+class ProgramRunCommand(Command):
+    _pattern = re.compile(r"python (.*).py (.*)$")
+
+    def __init__(self, matches: tuple[str, ...], settings: ChatSettings):
+        assert len(matches) == 2
+        super().__init__(matches=matches, settings=settings)
+        self.file_name = matches[0]
+        self.args = matches[1]
+        self.program_loader = settings.program_loader
+
+    def run(self):
+        program = self.program_loader.load_program(file_name=self.file_name)
+        arg_parser = ProgramArgParser()
+        for arg in program.args:
+            arg_parser.add_argument("--" + arg)
+        try:
+            _ = arg_parser.parse_args(shlex.split(self.args))
+            output = (
+                program.success_message
+                if random.random() > 0.1
+                else random.choice(program.possible_errors)
+            )
+        except ProgramArgParserError as e:
+            output = str(e)
+        program_message = Message(
+            role=Role.app,
+            text=output,
+        )
+        save_interface_message(message=program_message)

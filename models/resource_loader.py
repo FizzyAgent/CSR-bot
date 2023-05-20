@@ -2,23 +2,23 @@ import os
 
 from pydantic import BaseModel
 
-_companies: dict[str, tuple[str, str]] = {
-    "Singtel": ("singtel", "Singtel is a Singapore-based telecommunications company."),
-}
+from data.company_info import company_info
 
 
 class ResourceLoader(BaseModel):
-    resource_path: str = os.path.join(os.path.dirname(__file__), "..", "data")
+    data_path: str = os.path.join(os.path.dirname(__file__), "..", "data")
     company_path: str = ""
 
     @staticmethod
     def get_all_companies() -> list[str]:
-        return list(_companies.keys())
+        return list(company_info.keys())
 
-    def load_company(self, company_name: str):
-        if company_name not in _companies:
+    def set_company(self, company_name: str):
+        if company_name not in company_info:
             raise Exception("Company not found:: {}".format(company_name))
-        company_path = os.path.join(self.resource_path, _companies[company_name][0], "resources")
+        company_path = os.path.join(
+            self.data_path, company_info[company_name][0], "resources"
+        )
         if not os.path.isdir(company_path):
             raise Exception("Company resources not found: {}".format(company_path))
         self.company_path = company_path

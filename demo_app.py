@@ -12,6 +12,7 @@ from app.states import (
     get_all_companies,
     set_company_name,
     get_resource_loader,
+    get_program_loader,
 )
 from models.settings import ChatSettings
 
@@ -30,6 +31,7 @@ with st.sidebar:
         company=company,
         location=location,
         resource_loader=get_resource_loader(),
+        program_loader=get_program_loader(),
     )
 
 
