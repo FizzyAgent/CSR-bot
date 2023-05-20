@@ -10,7 +10,9 @@ def get_chat_input(messages: list[Message]) -> list[dict[str, str]]:
     return [m.to_gpt_message() for m in messages]
 
 
-def get_chat_response(messages: list[Message], company: str, location: str, resources: list[str]) -> str:
+def get_chat_response(
+    messages: list[Message], company: str, location: str, resources: list[str]
+) -> str:
     prompt_message = Message(
         role=Role.app,
         text=f"""The customer is connecting from {location}. Today's date is {datetime.now().strftime("%d %b %Y")}.

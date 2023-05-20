@@ -1,6 +1,8 @@
 from models.messages import Message, Role
 
-SAFETY_TEXT: str = "I am sorry, I do not understand your enquiry. Could you try rephrasing it."
+SAFETY_TEXT: str = (
+    "I am sorry, I do not understand your enquiry. Could you try rephrasing it."
+)
 FAILURE_TEXT: str = "I am sorry, the system is current experiencing technical difficulties. Please refresh the page or try again later.."
 
 SYSTEM_MESSAGE = Message(

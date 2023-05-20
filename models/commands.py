@@ -46,7 +46,7 @@ class SafeEchoCommand(EchoCommand):
 
 
 class ResourceCommand(Command):
-    _pattern = re.compile(r'cat (.*)')
+    _pattern = re.compile(r"cat (.*)")
 
     def __init__(self, matches: tuple[str, ...], settings: ChatSettings):
         assert len(matches) > 0
