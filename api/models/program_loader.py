@@ -20,8 +20,9 @@ class Program(BaseModel):
     name: str
     help: str
     args: list[str]
+    optional_args: list[str] = []
     success_message: str
-    possible_errors: list[str]
+    possible_errors: list[str] = []
 
 
 class ProgramLoader(BaseModel):

@@ -92,7 +92,6 @@ class ProgramInfoCommand(Command):
         save_interface_message(message=program_message)
 
 
-
 class ProgramRunCommand(Command):
     _pattern = re.compile(r"python (.*).py (.*)$")
 
@@ -115,12 +114,14 @@ class ProgramRunCommand(Command):
             return
         arg_parser = ProgramArgParser()
         for arg in program.args:
+            arg_parser.add_argument("--" + arg, required=True)
+        for arg in program.optional_args:
             arg_parser.add_argument("--" + arg)
         try:
             _ = arg_parser.parse_args(shlex.split(self.args))
             output = (
                 program.success_message
-                if random.random() > 0.1
+                if len(program.possible_errors) > 0 and random.random() > 0.2
                 else random.choice(program.possible_errors)
             )
         except ProgramArgParserError as e:
@@ -133,7 +134,7 @@ class ProgramRunCommand(Command):
 
 
 class ExitCommand(Command):
-    _pattern = re.compile(r"exit/(/)")
+    _pattern = re.compile(r"exit\(\)")
 
     def run(self):
-        save_interface_message(message=END_MESSAGE)
+        save_bot_message(message=END_MESSAGE)

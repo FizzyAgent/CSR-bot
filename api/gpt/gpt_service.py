@@ -36,11 +36,11 @@ Prioritise referring to these resources first whenever possible, over asking the
 
 The company has provided several Python programs that will allow you to execute actions beyond the application interface. Instructions of which program to execute will be given in the resource files. 
 
-Before executing a program, check what arguments are required using 'python [program name].py --help'
+ALWAYS check the program information first by calling: 'python [program name].py --help'
+Then, you may execute a program using the command: 'python [program name].py [args]'
+NEVER run a program without checking its information first, as the information will provide instructions that you must follow.
 
-To execute a program, use the command: 'python [program name].py [args]'
-
-Args should be given in the format: --arg value
+Args should be given in the command-line format: --arg value
 
 If invalid arguments are provided, the program will return an error. Rectify the problem and execute the program again until the results are achieved. 
 
@@ -62,7 +62,8 @@ The customer's response will be returned as '> "..."'
 
 # End of conversation
 
-To end the conversation, always check if the customer has any more enquiries before typing 'exit()'. 
+To end the conversation, always check if the customer has any more enquiries before typing 'exit()'.
+Do not include any other message in this command, as the interface will automatically send the end message to the customer.
 
 # Important notes
 

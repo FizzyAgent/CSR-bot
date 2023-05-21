@@ -65,5 +65,6 @@ with right:
         st.experimental_rerun()
 
 if len(interface_messages) > 0 and interface_messages[-1].role != Role.bot:
-    run(messages=interface_messages, settings=settings)
+    with st.spinner("CSRbot is thinking..."):
+        run(messages=interface_messages, settings=settings)
     st.experimental_rerun()
