@@ -1,4 +1,4 @@
-from models.messages import Message, Role
+from api.models.messages import Message, Role
 
 SAFETY_TEXT: str = (
     "I am sorry, I do not understand your enquiry. Could you try rephrasing it."

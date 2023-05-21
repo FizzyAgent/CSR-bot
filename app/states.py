@@ -1,9 +1,9 @@
 import streamlit as st
 
 from api.driver.formatter import format_customer_input
-from models.messages import Message, Role
-from models.program_loader import ProgramLoader
-from models.resource_loader import ResourceLoader
+from api.models.messages import Message, Role
+from api.models.program_loader import ProgramLoader
+from api.models.resource_loader import ResourceLoader
 
 
 def init_states():

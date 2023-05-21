@@ -3,7 +3,7 @@ from datetime import datetime
 import openai as openai
 
 from api.gpt.util import SYSTEM_MESSAGE, FAILURE_TEXT, SAFETY_TEXT
-from models.messages import Message, Role
+from api.models.messages import Message, Role
 
 
 def get_chat_input(messages: list[Message]) -> list[dict[str, str]]:

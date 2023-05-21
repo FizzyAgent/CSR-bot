@@ -1,6 +1,6 @@
 from streamlit.delta_generator import DeltaGenerator
 
-from models.messages import Message
+from api.models.messages import Message
 
 
 def render_left_message(delta: DeltaGenerator, message: Message):

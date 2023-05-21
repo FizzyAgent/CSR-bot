@@ -1,8 +1,8 @@
 from api.driver.parser import parse_gpt_output
 from api.gpt.gpt_service import get_chat_response
 from app.states import save_interface_message
-from models.messages import Message, Role
-from models.settings import ChatSettings
+from api.models.messages import Message, Role
+from api.models.settings import ChatSettings
 
 
 def run(messages: list[Message], settings: ChatSettings):

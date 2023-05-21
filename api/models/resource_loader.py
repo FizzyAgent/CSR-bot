@@ -6,7 +6,7 @@ from data.company_info import company_info
 
 
 class ResourceLoader(BaseModel):
-    data_path: str = os.path.join(os.path.dirname(__file__), "..", "data")
+    data_path: str = os.path.join(os.path.dirname(__file__), "../..", "data")
     company_path: str = ""
 
     @staticmethod

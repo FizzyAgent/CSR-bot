@@ -25,7 +25,7 @@ class Program(BaseModel):
 
 
 class ProgramLoader(BaseModel):
-    data_path: str = os.path.join(os.path.dirname(__file__), "..", "data")
+    data_path: str = os.path.join(os.path.dirname(__file__), "../..", "data")
     company_path: str = ""
 
     def set_company(self, company_name: str):

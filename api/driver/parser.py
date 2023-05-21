@@ -1,7 +1,6 @@
-import re
 from typing import Type
 
-from models.commands import (
+from api.models.commands import (
     Command,
     EchoCommand,
     SafeEchoCommand,
@@ -9,7 +8,7 @@ from models.commands import (
     ProgramInfoCommand,
     ProgramRunCommand,
 )
-from models.settings import ChatSettings
+from api.models.settings import ChatSettings
 
 __all_commands: list[Type[Command]] = [
     ResourceCommand,

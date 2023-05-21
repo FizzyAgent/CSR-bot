@@ -6,9 +6,9 @@ from re import Pattern
 
 from api.gpt.util import SAFETY_TEXT, END_MESSAGE
 from app.states import save_bot_message, save_interface_message
-from models.messages import Message, Role
-from models.program_loader import ProgramArgParser, ProgramArgParserError
-from models.settings import ChatSettings
+from api.models.messages import Message, Role
+from api.models.program_loader import ProgramArgParser, ProgramArgParserError
+from api.models.settings import ChatSettings
 
 
 class Command(ABC):

@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
-from models.program_loader import ProgramLoader
-from models.resource_loader import ResourceLoader
+from api.models.program_loader import ProgramLoader
+from api.models.resource_loader import ResourceLoader
 
 
 class ChatSettings(BaseModel):

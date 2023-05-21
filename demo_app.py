@@ -2,7 +2,7 @@ import streamlit as st
 from iso3166 import countries
 
 from api.driver.logic_service import run
-from models.messages import Role, Message
+from api.models.messages import Role, Message
 from app.rendering import render_left_message, render_right_message
 from app.states import (
     init_states,
@@ -14,7 +14,7 @@ from app.states import (
     get_resource_loader,
     get_program_loader,
 )
-from models.settings import ChatSettings
+from api.models.settings import ChatSettings
 
 st.set_page_config(page_title="CSR Bot Demo", layout="wide")
 init_states()
