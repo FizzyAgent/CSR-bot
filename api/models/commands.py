@@ -81,7 +81,9 @@ class ProgramInfoCommand(Command):
         except:
             error_message = Message(
                 role=Role.app,
-                text="Program not found: {}\nDid you check available resources for the correct program?".format(self.file_name),
+                text="Program not found: {}\nDid you check available resources for the correct program?".format(
+                    self.file_name
+                ),
             )
             save_interface_message(message=error_message)
             return
@@ -108,7 +110,9 @@ class ProgramRunCommand(Command):
         except:
             error_message = Message(
                 role=Role.app,
-                text="Program not found: {}\nDid you check available resources for the correct program?".format(self.file_name),
+                text="Program not found: {}\nDid you check available resources for the correct program?".format(
+                    self.file_name
+                ),
             )
             save_interface_message(message=error_message)
             return

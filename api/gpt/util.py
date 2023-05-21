@@ -7,9 +7,7 @@ FAILURE_TEXT: str = "I am sorry, the system is current experiencing technical di
 
 END_MESSAGE = Message(
     role=Role.bot,
-    text=(
-        "Thank you for contacting CSR Bot. Have a nice day, goodbye!"
-    ),
+    text=("Thank you for contacting CSR Bot. Have a nice day, goodbye!"),
 )
 
 SYSTEM_MESSAGE = Message(

@@ -6,7 +6,8 @@ from api.models.commands import (
     SafeEchoCommand,
     ResourceCommand,
     ProgramInfoCommand,
-    ProgramRunCommand, ExitCommand,
+    ProgramRunCommand,
+    ExitCommand,
 )
 from api.models.settings import ChatSettings
 
