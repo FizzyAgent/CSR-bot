@@ -1,8 +1,7 @@
 Steps to suspend account:
 1. Inform the customer of the reactivation pricing.
 2. If customer agrees, use program suspend_account to suspend the account.
-3. Use program termination_feedback to get feedback from the customer
-4. Ask if the customer has any other enquires.
+3. Use program customer_feedback to get feedback from the customer
 
 Pricing:
 To reactivate a suspended account, the customer has to pay a fee that comprises of:

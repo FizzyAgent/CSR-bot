@@ -5,6 +5,13 @@ SAFETY_TEXT: str = (
 )
 FAILURE_TEXT: str = "I am sorry, the system is current experiencing technical difficulties. Please refresh the page or try again later.."
 
+END_MESSAGE = Message(
+    role=Role.bot,
+    text=(
+        "Thank you for contacting CSR Bot. Have a nice day, goodbye!"
+    ),
+)
+
 SYSTEM_MESSAGE = Message(
     role=Role.system,
     text=(

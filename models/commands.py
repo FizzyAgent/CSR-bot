@@ -4,7 +4,7 @@ import shlex
 from abc import ABC
 from re import Pattern
 
-from api.gpt.util import SAFETY_TEXT
+from api.gpt.util import SAFETY_TEXT, END_MESSAGE
 from app.states import save_bot_message, save_interface_message
 from models.messages import Message, Role
 from models.program_loader import ProgramArgParser, ProgramArgParserError
@@ -76,12 +76,21 @@ class ProgramInfoCommand(Command):
         self.program_loader = settings.program_loader
 
     def run(self):
-        program = self.program_loader.load_program(file_name=self.file_name)
+        try:
+            program = self.program_loader.load_program(file_name=self.file_name)
+        except:
+            error_message = Message(
+                role=Role.app,
+                text="Program not found: {}\nDid you check available resources for the correct program?".format(self.file_name),
+            )
+            save_interface_message(message=error_message)
+            return
         program_message = Message(
             role=Role.app,
             text=program.help,
         )
         save_interface_message(message=program_message)
+
 
 
 class ProgramRunCommand(Command):
@@ -95,7 +104,15 @@ class ProgramRunCommand(Command):
         self.program_loader = settings.program_loader
 
     def run(self):
-        program = self.program_loader.load_program(file_name=self.file_name)
+        try:
+            program = self.program_loader.load_program(file_name=self.file_name)
+        except:
+            error_message = Message(
+                role=Role.app,
+                text="Program not found: {}\nDid you check available resources for the correct program?".format(self.file_name),
+            )
+            save_interface_message(message=error_message)
+            return
         arg_parser = ProgramArgParser()
         for arg in program.args:
             arg_parser.add_argument("--" + arg)
@@ -113,3 +130,10 @@ class ProgramRunCommand(Command):
             text=output,
         )
         save_interface_message(message=program_message)
+
+
+class ExitCommand(Command):
+    _pattern = re.compile(r"exit/(/)")
+
+    def run(self):
+        save_interface_message(message=END_MESSAGE)
