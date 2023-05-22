@@ -5,7 +5,7 @@ from api.models.messages import Message, Role
 from api.models.settings import ChatSettings
 
 
-def run(messages: list[Message], settings: ChatSettings):
+def run(messages: list[Message], settings: ChatSettings) -> bool:
     gpt_output = get_chat_response(
         messages=messages,
         company=settings.company,
@@ -19,5 +19,7 @@ def run(messages: list[Message], settings: ChatSettings):
         )
     )
     commands = parse_gpt_output(output=gpt_output, settings=settings)
+    terminated = False
     for command in commands:
-        command.run()
+        terminated = command.run() or terminated
+    return terminated

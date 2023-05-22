@@ -1,3 +1,5 @@
+import time
+
 import streamlit as st
 from iso3166 import countries
 
@@ -37,17 +39,8 @@ with st.sidebar:
 
 left, right = st.columns(2)
 
-with left:
-    st.markdown("### Behind the scenes of CSRbot")
-    interface_messages = get_interface_messages()
-    for message in interface_messages:
-        if message.role == Role.bot:
-            render_right_message(delta=left, message=message)
-        elif message.role == Role.app:
-            render_left_message(delta=left, message=message)
-
 with right:
-    st.markdown("### Chat with CSRbot")
+    st.markdown("### Chat with CSR Bot")
     chat_messages = get_chat_messages()
     for message in chat_messages:
         if message.role == Role.customer:
@@ -62,9 +55,18 @@ with right:
     if st.button("Submit") and new_input:
         new_message = Message(role=Role.customer, text=new_input)
         save_customer_message(message=new_message)
-        st.experimental_rerun()
 
-if len(interface_messages) > 0 and interface_messages[-1].role != Role.bot:
-    with st.spinner("CSRbot is thinking..."):
-        run(messages=interface_messages, settings=settings)
+with left:
+    st.markdown("### Behind the scenes of CSR Bot")
+    interface_messages = get_interface_messages()
+    for message in interface_messages:
+        if message.role == Role.bot:
+            render_right_message(delta=left, message=message)
+        elif message.role == Role.app:
+            render_left_message(delta=left, message=message)
+
+chat_messages = get_chat_messages()
+if len(chat_messages) > 0 and chat_messages[-1].role != Role.bot:
+    with st.spinner("CSR Bot is thinking..."):
+        terminated = run(messages=interface_messages, settings=settings)
     st.experimental_rerun()

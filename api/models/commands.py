@@ -21,7 +21,7 @@ class Command(ABC):
     def get_regex_pattern(cls) -> Pattern[str]:
         return cls._pattern
 
-    def run(self):
+    def run(self) -> bool:
         ...
 
 
@@ -34,13 +34,14 @@ class EchoCommand(Command):
         self.text = matches[0]
         self.safety = matches[1]
 
-    def run(self):
+    def run(self) -> bool:
         output = self.text if self.safety == "safe" else SAFETY_TEXT
         bot_message = Message(
             role=Role.bot,
             text=output,
         )
         save_bot_message(message=bot_message)
+        return False
 
 
 class SafeEchoCommand(EchoCommand):
@@ -57,13 +58,14 @@ class ResourceCommand(Command):
         self.file_name = matches[0]
         self.resource_loader = settings.resource_loader
 
-    def run(self):
+    def run(self) -> bool:
         resource = self.resource_loader.load_resource(file_name=self.file_name)
         resource_message = Message(
             role=Role.app,
             text=resource,
         )
         save_interface_message(message=resource_message)
+        return False
 
 
 class ProgramInfoCommand(Command):
@@ -75,7 +77,7 @@ class ProgramInfoCommand(Command):
         self.file_name = matches[0]
         self.program_loader = settings.program_loader
 
-    def run(self):
+    def run(self) -> bool:
         try:
             program = self.program_loader.load_program(file_name=self.file_name)
         except:
@@ -86,12 +88,13 @@ class ProgramInfoCommand(Command):
                 ),
             )
             save_interface_message(message=error_message)
-            return
+            return False
         program_message = Message(
             role=Role.app,
             text=program.help,
         )
         save_interface_message(message=program_message)
+        return False
 
 
 class ProgramRunCommand(Command):
@@ -104,7 +107,7 @@ class ProgramRunCommand(Command):
         self.args = matches[1]
         self.program_loader = settings.program_loader
 
-    def run(self):
+    def run(self) -> bool:
         try:
             program = self.program_loader.load_program(file_name=self.file_name)
         except:
@@ -115,7 +118,7 @@ class ProgramRunCommand(Command):
                 ),
             )
             save_interface_message(message=error_message)
-            return
+            return False
         arg_parser = ProgramArgParser()
         for arg in program.args:
             arg_parser.add_argument("--" + arg, required=True)
@@ -135,10 +138,12 @@ class ProgramRunCommand(Command):
             text=output,
         )
         save_interface_message(message=program_message)
+        return False
 
 
 class ExitCommand(Command):
     _pattern = re.compile(r"exit\(\)")
 
-    def run(self):
+    def run(self) -> bool:
         save_bot_message(message=END_MESSAGE)
+        return True
