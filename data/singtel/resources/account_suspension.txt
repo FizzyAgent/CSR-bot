@@ -1,0 +1,11 @@
+Steps to suspend account:
+1. Inform the customer of the reactivation pricing.
+2. If customer agrees, use program suspend_account to suspend the account.
+3. Use program customer_feedback to get feedback from the customer
+
+Pricing:
+To reactivate a suspended account, the customer has to pay a fee that comprises of:
+1. One-time reactivation fee: SG$10
+2. Additional suspended monthly fee:
+    - SG$3/month if account is suspended for less than 6 months
+    - SG$2/month if account is suspended for more than 6 months

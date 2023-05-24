@@ -1,0 +1,6 @@
+{
+ "name": "customer_feedback",
+ "help": "customer_feedback\noptions:\n--email: email to forward feedback form to",
+ "args": ["email", "user_id"],
+ "success_message": "Feedback form sent, we appreciate your feedback!"
+}
