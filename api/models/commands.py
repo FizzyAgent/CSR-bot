@@ -98,7 +98,7 @@ class ProgramInfoCommand(Command):
 
 
 class ProgramRunCommand(Command):
-    _pattern = re.compile(r"python (.*).py (.*)$")
+    _pattern = re.compile(r"python (.*).py ((?!--help).+)$")
 
     def __init__(self, matches: tuple[str, ...], settings: ChatSettings):
         assert len(matches) == 2
@@ -113,8 +113,9 @@ class ProgramRunCommand(Command):
         except:
             error_message = Message(
                 role=Role.app,
-                text="Program not found: {}\nDid you check available resources for the correct program?".format(
-                    self.file_name
+                text=(
+                    f"Program not found: {self.file_name}\n"
+                    "Did you check available resources for the correct program?"
                 ),
             )
             save_interface_message(message=error_message)
