@@ -76,7 +76,7 @@ Do not include any other message in this command, as the interface will automati
         model="gpt-4",
         messages=chat_input,
         temperature=0.2,
-        max_tokens=100,
+        max_tokens=256,
     )
     try:
         return res["choices"][0]["message"]["content"]
