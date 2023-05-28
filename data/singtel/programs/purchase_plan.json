@@ -1,0 +1,6 @@
+{
+ "name": "purchase_plan",
+ "help": "purchase_plan\noptions:\n--name: customer's full name, per government issued ID\n--email: customer's email\n--user_id: last 4 digits + letter of the customer's NRIC e.g. 123A\n--plan_id: ID of plan to purchase",
+ "args": ["name", "email", "user_id", "plan_id"],
+ "success_message": "Plan activated successfully, a confirmation email will be sent to your email. Note that your account number is: A312090312"
+}

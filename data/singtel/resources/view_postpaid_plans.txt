@@ -1,0 +1,24 @@
+All postpaid plans available.
+Do not list out all the plans to the customer. Instead, ask the customer for their requirements and recommend the best plan for them.
+
+SIM Only Plus 45
+ID: sim_plus_45
+$45.42/mth
+70GB, 5G speed
+1,000 mins calls, 1,000 SMS
+FREE Caller ID
+$100 phone voucher
+
+SIM Only Plus 55
+ID: sim_plus_55
+$55.51/month
+90GB, 5G speed
+1,500 mins Talktime & 1,500 SMS
+FREE Caller ID
+$100 phone voucher
+
+SIM Only Plus 30
+ID: sim_plus_30
+$30.28/mth
+60GB, 4G speed
+1,000 mins Talktime & 500 SMS

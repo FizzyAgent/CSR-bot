@@ -1,0 +1,40 @@
+All prepaid plans available.
+Do not list out all the plans to the customer. Instead, ask the customer for their requirements and recommend the best plan for them.
+
+# Local Prepaid Plans
+Only local calls and SMS are available
+
+ID: pre_paid_local
+Local Calls: 22¢ per min, rounded to the nearest cent
+Local SMS: 5¢ per SMS
+Local Data: 6.4¢ per 10KB
+
+# Overseas Prepaid Plans
+Same rates for local calls and SMS as the Local Prepaid Plan
+
+ID: pre_paid_international
+Oversea calls:
+Bangladesh: 10¢ per min
+India: 8¢ per min
+Indonesia: 22¢ per min
+Other Countries: 26¢ per min
+Overseas SMS:
+Bangladesh, India, Indonesia: 5¢ per SMS
+Other Countries: 15¢ per SMS
+
+
+# Data Prepaid Plans
+Same rates for local calls and SMS as the Local Prepaid Plan
+Different data packages are available:
+
+ID: pre_paid_data_1gb
+4-Week 1GB $10
+
+ID: pre_paid_data_5gb
+4-Week 5GB - $20
+
+ID: pre_paid_data_20gb
+4-Week 20GB - $25
+
+ID: pre_paid_data_40gb
+4-Week 40GB - $30

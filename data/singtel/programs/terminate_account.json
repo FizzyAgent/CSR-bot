@@ -1,6 +1,6 @@
 {
  "name": "terminate_account",
- "help": "terminate_account\noptions:\n--account_num: account number for account to be terminated\n--user_id: last 4 digits + letter of the user's NRIC e.g. 123A",
+ "help": "terminate_account\noptions:\n--account_num: account number for account to be terminated\n--user_id: last 4 digits + letter of the customer's NRIC e.g. 123A",
  "args": ["account_num", "user_id"],
  "success_message": "Account termination registered. A confirmation email will be sent to the email registered with the account within 2 business days.",
  "possible_errors": [
