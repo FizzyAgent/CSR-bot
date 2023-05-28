@@ -40,10 +40,14 @@ class ProgramLoader(BaseModel):
     def load_program(self, file_name: str) -> Program:
         file_path = os.path.join(self.company_path, file_name + ".json")
         if not os.path.isfile(file_path):
-            raise Exception("Program file does not exist: {}".format(file_path))
+            error = f"Program file does not exist: {file_path}"
+            print(error)
+            raise Exception(error)
         with open(file_path, "r") as f:
             json_obj = json.load(f)
         try:
             return Program.parse_obj(json_obj)
         except ValidationError:
-            raise Exception("Program file is malformed: {}".format(file_name))
+            error = f"Program file is malformed: {file_path}"
+            print(error)
+            raise Exception(error)
