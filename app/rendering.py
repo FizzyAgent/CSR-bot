@@ -4,7 +4,7 @@ from api.models.messages import Message
 
 
 def render_left_message(delta: DeltaGenerator, message: Message):
-    text = message.text.replace("\n", "  \n")
+    text = message.text.replace("\n", "  \n").replace("$", "\$")
     delta.markdown(f"**{message.role.humanized}**:  \n{text}")
 
 
