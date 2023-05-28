@@ -1,6 +1,6 @@
 {
  "name": "suspend_account",
- "help": "suspend_account\noptions:\n--account_num: account number for account to be terminated\n--user_id: last 4 digits + letter of the user's NRIC e.g. 123A\n--n_months: number of months to suspend the account for",
+ "help": "suspend_account\noptions:\n--account_num: account number for account to be terminated\n--user_id: last 4 digits + letter of the customer's NRIC e.g. 123A\n--n_months: number of months to suspend the account for",
  "args": ["account_num", "user_id", "n_months"],
  "success_message": "Account suspension registered. A confirmation email will be sent to the email registered with the account within 2 hours. The email will contain a link to reactivate the account.",
  "possible_errors": [

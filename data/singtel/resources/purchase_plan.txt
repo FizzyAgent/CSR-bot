@@ -1,0 +1,11 @@
+Steps to activate a new plan:
+1. Ask the customer for their:
+    - full name per government-issued ID
+    - email
+    - last 4 digits and letter if their NRIC e.g. 123A
+2. Ask the customer if they want a pre-paid or post-paid plan
+3. Ask the customer what requires they have for the plans
+4. Refer to plan resources and recommend the best plan for the customer
+5. Ask the customer if they want to port their existing number
+6. If they want to port their existing number, ask them for their existing number and confirm it with them
+7. Use program purchase_plan to create a new plan
