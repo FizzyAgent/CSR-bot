@@ -26,7 +26,7 @@ class Command(ABC):
 
 
 class EchoCommand(Command):
-    _pattern = re.compile(r'echo \$ "(.*)"\s+.*evaluation: (\w*)', re.MULTILINE)
+    _pattern = re.compile(r'echo \$ "((?:.|\s)*)"\s+.*evaluation: (\w*)', re.MULTILINE)
 
     def __init__(self, matches: tuple[str, ...], settings: ChatSettings):
         assert len(matches) == 2
@@ -44,9 +44,14 @@ class EchoCommand(Command):
         return False
 
 
-class SafeEchoCommand(EchoCommand):
-    def __init__(self, matches: tuple[str, ...], settings: ChatSettings):
-        super().__init__(matches=(SAFETY_TEXT, "safe"), settings=settings)
+class ErrorCommand(Command):
+    def run(self) -> bool:
+        error_message = Message(
+            role=Role.app,
+            text="Unknown command, did you use the correct syntax?",
+        )
+        save_interface_message(message=error_message)
+        return False
 
 
 class ResourceCommand(Command):
@@ -129,7 +134,7 @@ class ProgramRunCommand(Command):
             _ = arg_parser.parse_args(shlex.split(self.args))
             output = (
                 program.success_message
-                if len(program.possible_errors) > 0 and random.random() > 0.2
+                if len(program.possible_errors) == 0 or random.random() > 0.2
                 else random.choice(program.possible_errors)
             )
         except ProgramArgParserError as e:

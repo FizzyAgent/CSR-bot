@@ -3,7 +3,7 @@ from typing import Type
 from api.models.commands import (
     Command,
     EchoCommand,
-    SafeEchoCommand,
+    ErrorCommand,
     ResourceCommand,
     ProgramInfoCommand,
     ProgramRunCommand,
@@ -26,5 +26,5 @@ def parse_gpt_output(output: str, settings: ChatSettings) -> list[Command]:
         if match := command.get_regex_pattern().search(output):
             parsed_commands.append(command(matches=match.groups(), settings=settings))
     if len(parsed_commands) == 0:
-        parsed_commands.append(SafeEchoCommand(matches=(), settings=settings))
+        parsed_commands.append(ErrorCommand(matches=(), settings=settings))
     return parsed_commands

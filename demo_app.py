@@ -23,9 +23,11 @@ with st.sidebar:
     st.markdown("**Settings**")
     company = st.selectbox(label="Select a Company", options=get_all_companies())
     set_company_name(company_name=company)
+    countries = [c.name for c in countries]
     location = st.selectbox(
         label="Your Location",
-        options=[c.name for c in countries],
+        options=countries,
+        index=countries.index("Singapore"),
     )
     settings = ChatSettings(
         company=company,
@@ -67,6 +69,7 @@ with right:
             return
         new_message = Message(role=Role.customer, text=user_input)
         save_customer_message(message=new_message)
+
     st.button("Submit", on_click=save_user_input)
 
 terminated = False
