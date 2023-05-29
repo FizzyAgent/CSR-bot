@@ -3,14 +3,14 @@ from iso3166 import countries
 
 from api.driver.logic_service import run
 from api.models.messages import Role, Message
-from app.rendering import render_left_message, render_right_message
+from app.rendering import render_left_message, render_right_message, render_style
 from app.states import (
     init_states,
     get_chat_messages,
     get_interface_messages,
     save_customer_message,
     get_all_companies,
-    set_company_name,
+    set_chat_settings,
     get_resource_loader,
     get_program_loader,
 )
@@ -23,43 +23,19 @@ with st.sidebar:
     left, _, mid = st.columns((2, 0.1, 3))
 right = st.columns((1))[0]
 
-st.markdown(
-    """
-    <style>
-    .appview-container{
-        display: flex;
-        justify-content: space-between;
-    }
-    section[data-testid='stSidebar'][aria-expanded='true']>:first-child {
-        width: 100%;
-    }
-    /* Sidebar takes up 3 portions of width */
-    .appview-container > :first-child {
-        flex: 3;
-        max-width: 100%;
-    }
-    /* Right side takes up 2 portions of width */
-    .appview-container > :nth-child(2) {
-        flex: 2;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-
+render_style()
 init_states()
 
 with left:
     st.markdown("**Settings**")
     company = st.selectbox(label="Select a Company", options=get_all_companies())
-    set_company_name(company_name=company)
     countries = [c.name for c in countries]
     location = st.selectbox(
         label="Your Location",
         options=countries,
         index=countries.index("Singapore"),
     )
+    set_chat_settings(company_name=company, location=location)
     settings = ChatSettings(
         company=company,
         location=location,
