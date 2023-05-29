@@ -11,7 +11,11 @@ def get_chat_input(messages: list[Message]) -> list[dict[str, str]]:
 
 
 def get_chat_response(
-    messages: list[Message], company: str, location: str, resources: list[str]
+    messages: list[Message],
+    company: str,
+    location: str,
+    resources: list[str],
+    openai_key: str,
 ) -> str:
     prompt_message = Message(
         role=Role.app,
@@ -72,6 +76,7 @@ Do not include any other message in this command, as the interface will automati
     )
     messages = [SYSTEM_MESSAGE, prompt_message, instructions_message] + messages
     chat_input = get_chat_input(messages=messages)
+    openai.api_key = openai_key
     res = openai.ChatCompletion.create(
         model="gpt-4",
         messages=chat_input,

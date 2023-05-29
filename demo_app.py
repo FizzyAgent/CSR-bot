@@ -15,11 +15,42 @@ from app.states import (
     get_program_loader,
 )
 from api.models.settings import ChatSettings
+from keys import OPENAI_API_KEY
 
 st.set_page_config(page_title="CSR Bot Demo", layout="wide")
-init_states()
 
 with st.sidebar:
+    left, _, mid = st.columns((2, 0.1, 3))
+right = st.columns((1))[0]
+
+st.markdown(
+    """
+    <style>
+    .appview-container{
+        display: flex;
+        justify-content: space-between;
+    }
+    section[data-testid='stSidebar'][aria-expanded='true']>:first-child {
+        width: 100%;
+    }
+    /* Sidebar takes up 3 portions of width */
+    .appview-container > :first-child {
+        flex: 3;
+        max-width: 100%;
+    }
+    /* Right side takes up 2 portions of width */
+    .appview-container > :nth-child(2) {
+        flex: 2;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+init_states()
+
+with left:
     st.markdown("**Settings**")
     company = st.selectbox(label="Select a Company", options=get_all_companies())
     set_company_name(company_name=company)
@@ -35,28 +66,30 @@ with st.sidebar:
         resource_loader=get_resource_loader(),
         program_loader=get_program_loader(),
     )
+    st.markdown("-----")
+    openai_key = st.text_input(
+        label="OpenAI Key",
+        value=OPENAI_API_KEY,
+        help="Get a free key from https://platform.openai.com",
+    )
 
-
-left, right = st.columns(2)
-
-
-with left:
+with mid:
     st.markdown("### Behind the scenes of CSR Bot")
     interface_messages = get_interface_messages()
     for message in interface_messages:
         if message.role == Role.bot:
-            render_right_message(delta=left, message=message)
+            render_right_message(delta=mid, message=message)
         elif message.role == Role.app:
-            render_left_message(delta=left, message=message)
+            render_left_message(delta=mid, message=message)
 
 with right:
     st.markdown("### Chat with CSR Bot")
     chat_messages = get_chat_messages()
     for message in chat_messages:
         if message.role == Role.customer:
-            render_right_message(delta=right, message=message)
+            render_right_message(delta=st.container(), message=message)
         elif message.role == Role.bot:
-            render_left_message(delta=right, message=message)
+            render_left_message(delta=st.container(), message=message)
     new_input = st.text_area(
         label="Message Box",
         label_visibility="hidden",
@@ -77,6 +110,8 @@ messages = get_chat_messages()
 if len(messages) > 0 and messages[-1].role != Role.bot:
     while not terminated and messages[-1].role != Role.bot:
         interface_messages = get_interface_messages()
-        terminated = run(messages=interface_messages, settings=settings)
+        terminated = run(
+            messages=interface_messages, settings=settings, openai_key=openai_key
+        )
         messages = get_chat_messages()
     st.experimental_rerun()
