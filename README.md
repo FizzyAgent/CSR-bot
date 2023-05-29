@@ -8,7 +8,11 @@ The bot is built with OpenAI's GPT-4 model, but the code can be easily modified 
 
 ## Demo
 
-The demo app is built with [Streamlit](https://streamlit.io/), and can be run locally. There are no plans to deploy the app at the moment.
+You can try out the demo through [this link](https://fizzyagent-csr-bot-demo-app-jeciby.streamlit.app/). 
+
+Note that the demo requires an OpenAI key to run, which you can obtain for free on [their platform](https://platform.openai.com).
+
+The demo app is built with [Streamlit](https://streamlit.io/) and hosted via [Streamlit Community Cloud](https://share.streamlit.io/). You can also run the demo app locally.
 
 ## Installation
 
@@ -85,7 +89,7 @@ From general usage, the bot is likely to use the default safety response in mali
 
 ## Future Work
 
-- [ ] Add more companies
-- [ ] Add more resources and workflows
+- [ ] Add new companies
+- [ ] Add more workflows for existing companies
 - [ ] Add more models
 - [ ] Improve the UI

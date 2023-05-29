@@ -5,12 +5,13 @@ from api.models.messages import Message, Role
 from api.models.settings import ChatSettings
 
 
-def run(messages: list[Message], settings: ChatSettings) -> bool:
+def run(messages: list[Message], settings: ChatSettings, openai_key: str) -> bool:
     gpt_output = get_chat_response(
         messages=messages,
         company=settings.company,
         location=settings.location,
         resources=settings.resource_loader.get_all_resources(),
+        openai_key=openai_key,
     )
     save_interface_message(
         message=Message(
