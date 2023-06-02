@@ -36,10 +36,22 @@ with left:
         index=countries.index("Singapore"),
     )
     set_chat_settings(company_name=company, location=location)
+    resource_loader = get_resource_loader()
+    all_resources = resource_loader.get_all_resources()
+    resource_display = [
+        "- " + x.replace(".txt", "").replace("_", " ").capitalize()
+        for x in all_resources
+    ]
+    resource_display.sort()
+    st.markdown(
+        f"Here are the enquiries that CSR Bot can help for {company}:  \n"
+        + ("\n".join(resource_display))
+        + "\n\nMore workflows and companies will be added soon!"
+    )
     settings = ChatSettings(
         company=company,
         location=location,
-        resource_loader=get_resource_loader(),
+        resource_loader=resource_loader,
         program_loader=get_program_loader(),
     )
     st.markdown("-----")
@@ -79,7 +91,10 @@ with right:
         new_message = Message(role=Role.customer, text=user_input)
         save_customer_message(message=new_message)
 
-    st.button("Submit", on_click=save_user_input)
+    has_openai_key = len(openai_key) > 0
+    st.button("Submit", disabled=not has_openai_key, on_click=save_user_input)
+    if not has_openai_key:
+        st.markdown("Please enter your OpenAI key under Settings to start chatting with CSR Bot!")
 
 terminated = False
 messages = get_chat_messages()
