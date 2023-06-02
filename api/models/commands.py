@@ -138,7 +138,10 @@ class ProgramRunCommand(Command):
                 else random.choice(program.possible_errors)
             )
         except ProgramArgParserError as e:
-            output = str(e)
+            output = (
+                f"Error running program: {e}\n"
+                f"Please run `python {self.file_name}.py --help` for inform on the program."
+            )
         program_message = Message(
             role=Role.app,
             text=output,
