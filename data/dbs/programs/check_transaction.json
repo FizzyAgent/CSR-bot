@@ -1,0 +1,9 @@
+{
+ "name": "check_transaction",
+ "help": "check_transaction\noptions:\n--t_date: date of transaction\n--t_amt: amount of transaction",
+ "args": ["t_date", "t_amt"],
+ "success_message": "Transaction record found:\nID: POS29130213\nTransaction info: NETS-POS to 7-Eleven",
+  "possible_errors": [
+   "No matching transaction record found"
+  ]
+}

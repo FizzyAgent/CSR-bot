@@ -1,0 +1,9 @@
+{
+ "name": "auth_customer",
+ "help": "auth_customer\noptions:\n--name: name of the customer as per government issued ID\n--account_num: account number of the customer\n--customer_id: last 4 digits + letter of the customer's NRIC e.g. 123A",
+ "args": ["name", "account_num", "customer_id"],
+ "success_message": "Customer record found",
+  "possible_errors": [
+   "No matching customer record found"
+  ]
+}

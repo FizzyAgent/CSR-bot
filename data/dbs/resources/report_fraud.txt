@@ -1,0 +1,14 @@
+Steps to handle a reported fraudulent transaction:
+1. Ask the customer for their:
+    - full name per government-issued ID
+    - last 4 digits and letter if their NRIC e.g. 123A
+    - account number of the affected account
+2. Use program auth_customer to verify the customer's information
+3. Ask the customer for the:
+    - date of fraudulent transaction
+    - amount of fraudulent transaction
+4. Use program check_transaction to get information about the reported transaction
+5. Confirm the transaction information with the customer
+6. Use program report_transaction to report the transaction
+7. Inform the customer that a dispute has been raised
+8. Inform the customer that their card will be blocked and a new card will be issued to them
