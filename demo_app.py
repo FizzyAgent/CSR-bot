@@ -17,6 +17,8 @@ from app.states import (
 from api.models.settings import ChatSettings
 from keys import OPENAI_API_KEY
 
+MAX_MESSAGES = 20
+
 st.set_page_config(page_title="CSR Bot Demo", layout="wide")
 
 with st.sidebar:
@@ -45,8 +47,11 @@ with left:
     resource_display.sort()
     st.markdown(
         f"Here are the enquiries that CSR Bot can help for {company}:  \n"
-        + ("\n".join(resource_display))
-        + "\n\nMore workflows and companies will be added soon!"
+        + "\n".join(resource_display)
+        + "\n\nMore workflows and companies will be added soon!\n\n"
+        "Disclaimer:  \n"
+        "This app is for demonstration purposes. "
+        "Do not enter your actual personal information."
     )
     settings = ChatSettings(
         company=company,
@@ -94,12 +99,23 @@ with right:
     has_openai_key = len(openai_key) > 0
     st.button("Submit", disabled=not has_openai_key, on_click=save_user_input)
     if not has_openai_key:
-        st.markdown("Please enter your OpenAI key under Settings to start chatting with CSR Bot!")
+        st.markdown(
+            "Please enter your OpenAI key under Settings to start chatting with CSR Bot!"
+        )
 
 terminated = False
 messages = get_chat_messages()
-if len(messages) > 0 and messages[-1].role != Role.bot:
-    while not terminated and messages[-1].role != Role.bot:
+interface_messages = get_interface_messages()
+if (
+    len(interface_messages) < MAX_MESSAGES
+    and len(messages) > 0
+    and messages[-1].role != Role.bot
+):
+    while (
+        len(interface_messages) < MAX_MESSAGES
+        and not terminated
+        and messages[-1].role != Role.bot
+    ):
         interface_messages = get_interface_messages()
         terminated = run(
             messages=interface_messages, settings=settings, openai_key=openai_key
