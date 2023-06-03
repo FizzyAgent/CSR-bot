@@ -17,6 +17,8 @@ from app.states import (
 from api.models.settings import ChatSettings
 from keys import OPENAI_API_KEY
 
+MAX_MESSAGES = 20
+
 st.set_page_config(page_title="CSR Bot Demo", layout="wide")
 
 with st.sidebar:
@@ -103,8 +105,17 @@ with right:
 
 terminated = False
 messages = get_chat_messages()
-if len(messages) > 0 and messages[-1].role != Role.bot:
-    while not terminated and messages[-1].role != Role.bot:
+interface_messages = get_interface_messages()
+if (
+    len(interface_messages) < MAX_MESSAGES
+    and len(messages) > 0
+    and messages[-1].role != Role.bot
+):
+    while (
+        len(interface_messages) < MAX_MESSAGES
+        and not terminated
+        and messages[-1].role != Role.bot
+    ):
         interface_messages = get_interface_messages()
         terminated = run(
             messages=interface_messages, settings=settings, openai_key=openai_key
