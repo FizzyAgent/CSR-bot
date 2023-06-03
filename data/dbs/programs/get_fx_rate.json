@@ -1,0 +1,6 @@
+{
+ "name": "get_fx_rate",
+ "help": "get_fx_rate\nrun `python get_fx_rate.py` to get the latest DBS foreign exchange rates",
+ "args": [],
+ "success_message": "Latest DBS foreign exchange rates of 1 SGD:\n1.10793 AUD\n0.98855 CAD\n0.68406 EUR\n0.58823 GBP\n5.76219 HKD\n10752.68817 IDR\n60.58036 INR\n102.06165 JPY\n0.73805 USD"
+}

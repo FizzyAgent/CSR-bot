@@ -8,6 +8,7 @@ from api.models.commands import (
     ProgramInfoCommand,
     ProgramRunCommand,
     ExitCommand,
+    CoTCommand,
 )
 from api.models.settings import ChatSettings
 
@@ -15,6 +16,7 @@ __all_commands: list[Type[Command]] = [
     ResourceCommand,
     ProgramInfoCommand,
     ProgramRunCommand,
+    CoTCommand,
     EchoCommand,
     ExitCommand,
 ]

@@ -25,6 +25,19 @@ class Command(ABC):
         ...
 
 
+class CoTCommand(Command):
+    _pattern = re.compile(r"^chain of thoughts:", re.MULTILINE | re.IGNORECASE)
+
+    def run(self) -> bool:
+        output = "Internal chain of thoughts noted. Please continue."
+        message = Message(
+            role=Role.app,
+            text=output,
+        )
+        save_interface_message(message=message)
+        return False
+
+
 class EchoCommand(Command):
     _pattern = re.compile(r'echo \$ "((?:.|\s)*)"\s+.*evaluation: (\w*)', re.MULTILINE)
 
@@ -74,7 +87,7 @@ class ResourceCommand(Command):
 
 
 class ProgramInfoCommand(Command):
-    _pattern = re.compile(r"python (.*).py --help")
+    _pattern = re.compile(r"python (.*).py.*--help.*")
 
     def __init__(self, matches: tuple[str, ...], settings: ChatSettings):
         assert len(matches) == 1
@@ -103,13 +116,13 @@ class ProgramInfoCommand(Command):
 
 
 class ProgramRunCommand(Command):
-    _pattern = re.compile(r"python (.*).py ((?!--help).+)$")
+    _pattern = re.compile(r"python (.*).py ?((?!--help).+)?$")
 
     def __init__(self, matches: tuple[str, ...], settings: ChatSettings):
         assert len(matches) == 2
         super().__init__(matches=matches, settings=settings)
         self.file_name = matches[0]
-        self.args = matches[1]
+        self.args = matches[1] or ""
         self.program_loader = settings.program_loader
 
     def run(self) -> bool:
