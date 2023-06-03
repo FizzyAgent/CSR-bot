@@ -1,0 +1,6 @@
+{
+ "name": "report_transaction",
+ "help": "report_transaction\noptions:\n--t_id: ID of reported transaction",
+ "args": ["t_id"],
+ "success_message": "Transaction reported successfully"
+}

@@ -1,0 +1,8 @@
+Steps to convert foreign exchange rates:
+1. Make sure you have the following information:
+    - The currency the customer wants to convert from
+    - The currency the customer wants to convert to
+    - The amount the customer wants to convert
+3. Use program get_fx_rate to get the latest foreign exchange rate
+4. Calculate the converted amount. We don't have a program for you so you have to do the calculations yourself.
+5. Inform the customer of the converted amount and exhange rate.
