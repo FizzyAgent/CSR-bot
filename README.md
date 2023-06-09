@@ -8,7 +8,7 @@ The bot is built with OpenAI's GPT-4 model, but the code can be easily modified 
 
 ## Demo
 
-You can try out the demo through [this link](https://fizzyagent-csr-bot-demo-app-jeciby.streamlit.app/). 
+You can try out the demo through [this link](https://fizzyagent-csr-bot.streamlit.app/). 
 
 Note that the demo requires an OpenAI key to run, which you can obtain for free on [their platform](https://platform.openai.com).
 
