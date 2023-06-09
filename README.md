@@ -45,6 +45,15 @@ The bot is instructed to use this format to send messages to the customer. The f
 
 While the bot is unlikely to send inappropriate messages given prior instructions, it is possible for malicious users to prompt the bot to send inappropriate responses or messages that may contain sensitive information, either about the company or the prompting used. The second argument is used to prevent this from happening, and the system falls back to a default message if the message is evaluated to be `unsafe`.
 
+### Chain-of-Thoughts
+
+```
+Chain of Thoughts:
+<thoughts>
+```
+
+Inspired by [the Chain of Thoughts paper](https://arxiv.org/abs/2201.11903), the bot is instructed to use this format to record its internal thoughts. This is useful for debugging and understanding the bot's internal processes, as well as an internal memory for the bot to perform more complex tasks like calculations. 
+
 ### Retrieving Company Resources
 
 ```
