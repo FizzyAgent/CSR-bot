@@ -17,7 +17,7 @@ from app.states import (
 from api.models.settings import ChatSettings
 from keys import OPENAI_API_KEY
 
-MAX_MESSAGES = 20
+MAX_MESSAGES = 50
 
 st.set_page_config(page_title="CSR Bot Demo", layout="wide")
 
